@@ -31,19 +31,35 @@ module.exports = {
 
     // get all billing according to email
     getbilling(req, res) {
-
+        const page = req.query.page;
+        const limit = 10;
         Billing.find()
-            .then(billings => {
-                if (billings) {
+            .then(allbillings => {
+                if (allbillings) {
+                    const datalength = allbillings.length;
                     let total = 0;
-                    for (i = 0; i < billings.length; i++) {
-                        total += billings[i].amount;
+                    for (i = 0; i < allbillings.length; i++) {
+                        total += allbillings[i].amount;
                     }
-                    
-                    return res.status(200).json({
-                        billings,
-                        total
-                    })
+                    if (datalength < 10) {
+                        return res.status(200).json({
+                            allbillings,
+                            total,
+                            datalength
+                        })
+                    } else {
+                        Billing.find()
+                            .limit(limit)
+                            .skip(Number(page) * limit)
+                            .then(billings => {
+                                return res.status(200).json({
+                                    billings,
+                                    total,
+                                    datalength
+                                })
+                            })
+                    }
+
                 } else {
                     return res.status(200).json({
                         message: 'No Billings Found'
