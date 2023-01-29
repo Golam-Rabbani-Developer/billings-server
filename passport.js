@@ -1,5 +1,6 @@
 const User = require('./models/User');
 
+
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const opts = {};
@@ -11,9 +12,8 @@ opts.secretOrKey = 'SECRET';
 
 module.exports = passport => {
     passport.use(new JwtStrategy(opts, (payload, done) => {
-        User.findOne({ _id: payload._id })
+        User.findOne({ email: payload.email })
             .then(user => {
-                console.log(user)
                 if (!user) {
                     return done(null, false)
                 } else {
@@ -21,7 +21,7 @@ module.exports = passport => {
                 }
             })
             .catch(err => {
-                console.log(err, " inside passport")
+                console.log(err, "inside passport")
                 done(err, false)
             })
     }))

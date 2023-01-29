@@ -3,9 +3,12 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const passport = require('passport');
 require('dotenv').config();
 const app = express();
+
+
 
 
 // setting port 
@@ -17,6 +20,12 @@ app.use(express.json());
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
+
+
+
+// checking the user is authenticated or not using passport
+app.use(passport.initialize())
+require('./passport')(passport)
 
 
 // connect with mongodb 

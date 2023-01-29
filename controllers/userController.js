@@ -74,7 +74,7 @@ module.exports = {
 
                                     return res.status(201).json({
                                         message: "User Created Successfully",
-                                        token: `Bearer ${token}`,
+                                        token: `${token}`,
                                     })
                                 }
                             })
@@ -89,50 +89,4 @@ module.exports = {
                 return serverError(res, error)
             })
     },
-
-
-    userUpdate(req, res) {
-        let data = req.body;
-        let updatedUser = { ...req.user._doc }
-        let user = {
-            transaction: updatedUser.transaction,
-            name: data.name,
-            email: updatedUser.email,
-            password: updatedUser.password,
-            balance: updatedUser.balance,
-            income: data.income,
-            loans: updatedUser.loans,
-            image: data.image,
-            profession: data.profession,
-            address: data.address,
-        }
-        User.findByIdAndUpdate(updatedUser._id, { $set: user }, { new: true })
-            .then(user => {
-
-                if (user) {
-                    return res.status(201).json({
-                        message: "User Created Successfully",
-                        user
-                    })
-                }
-            })
-            .catch(err => serverError(res, err))
-    },
-
-    getAlluser(req, res) {
-        User.find()
-            .then(users => users.length > 0 && res.status(201).json({ users }))
-            .catch(err => serverError(res, err))
-    },
-
-    removeUser(req, res) {
-        const { id } = req.params;
-        User.findById(id)
-            .then(user => {
-                return res.status(201).json({
-                    user
-                })
-            })
-            .catch(err => serverError(res, err))
-    }
 }

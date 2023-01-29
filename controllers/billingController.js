@@ -8,6 +8,7 @@ module.exports = {
     // add a new billing 
     addbilling(req, res) {
         const { email, amount, name, phone } = req.body.data;
+        console.log(req)
 
         const billing = new Billing({
             email,
@@ -31,6 +32,7 @@ module.exports = {
 
     // get all billing according to email
     getbilling(req, res) {
+        console.log(req.headers)
         const page = req.query.page;
         const limit = 10;
         Billing.find()
