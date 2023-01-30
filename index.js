@@ -12,7 +12,7 @@ const app = express();
 
 
 // setting port 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8000;
 
 // setting middleware 
 app.use(cors());
@@ -51,6 +51,6 @@ app.get('/', (req, res) => {
 
 // listening our port
 app.listen(port, () => {
-    console.log(`Application is listening at : 5000`)
+    console.log(`Application is listening at : 8000`)
 });
 
