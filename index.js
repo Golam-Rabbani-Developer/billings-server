@@ -43,7 +43,7 @@ app.use('/api', require('./routers/billingRouter'))
 
 // setting initial route 
 app.get('/', (req, res) => {
-    return res.json({
+    res.json({
         message: 'Welcome to our Dashboard'
     })
 });
@@ -51,6 +51,6 @@ app.get('/', (req, res) => {
 
 // listening our port
 app.listen(port, () => {
-    console.log(`Application is listening at`, port)
+    console.log(`Application is listening at : 5000`)
 });
 
