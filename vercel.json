@@ -1,0 +1,23 @@
+{
+    "version": 2,
+    "builds": [
+        {
+            "src": "*.js",
+            "use": "@vercel/node",
+            "config": {
+                "runtime": "nodejs14"
+            }
+        }
+    ],
+    "routes": [
+        {
+            "src": "/api/[...route]",
+            "dest": "routers/index.js"
+        },
+        {
+            "handle": "filesystem",
+            "src": "*",
+            "dest": "index.js"
+        }
+    ]
+}
