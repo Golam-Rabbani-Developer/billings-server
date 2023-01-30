@@ -50,7 +50,8 @@ app.get('/', (req, res) => {
 
 
 // listening our port
-app.listen(port, () => {
-    console.log(`Application is listening at : 8000`)
-});
+
+app.listen(port, (req, res) => {
+    console.log(`Application is running at ${port}`)
+})
 
