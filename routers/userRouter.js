@@ -2,8 +2,7 @@
 const router = require('express').Router()
 
 
-const { register, login } = require('../controllers/usercontroller');
-const authenticate = require("../authenticate")
+const { register, login } = require('../controllers/userController');
 
 // registration route
 router.post('/registration', register)

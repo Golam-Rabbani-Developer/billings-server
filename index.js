@@ -35,7 +35,7 @@ mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cl
 
 
 
-app.use('/api/users', require('./routers/userRouter'));
+app.use('/api', require('./routers/userRouter'));
 app.use('/api', require('./routers/billingRouter'))
 
 
